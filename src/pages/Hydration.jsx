@@ -52,7 +52,7 @@ const Hydration = () => {
     }
   };
 
-    const deleteHydrationById = async (id) => {
+  const deleteHydrationById = async (id) => {
     try {
       await api.delete(`/hydrations/${id}`);
       fetchHydration();
@@ -81,12 +81,11 @@ const Hydration = () => {
   }, {});
 
   const chartData = Object.keys(grouped)
-  .map((day) => ({
-    date: day,
-    weight: grouped[day],
-  }))
-  .sort((a, b) => new Date(a.date) - new Date(b.date));
-
+    .map((day) => ({
+      date: day,
+      weight: grouped[day],
+    }))
+    .sort((a, b) => new Date(a.date) - new Date(b.date));
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-600 to-green-600 flex flex-col">
@@ -99,11 +98,11 @@ const Hydration = () => {
           onClick={() => navigate("/dashboard")}
           className="px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 transition"
         >
-          Back to Dashboard
+          Dashboard
         </button>
       </header>
 
-      <main className="flex p-6 grid grid-cols-1 gap-6">
+      <main className="flex p-6 grid grid-cols-1 gap-6 max-w-6xl mx-auto w-full">
         {/* Buttons */}
         <div className="bg-white rounded-xl shadow p-6 flex flex-col gap-6 items-center mb-6">
           <h2 className="text-lg font-semibold text-gray-700">Add water</h2>
@@ -183,6 +182,33 @@ const Hydration = () => {
           </ResponsiveContainer>
         </div>
       </main>
+
+      {/* Footer */}
+      <footer className="bg-white border-t mt-8">
+        <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center px-6 py-4">
+          <div className="flex flex-cols-2 items-center md:gap-6">
+            <img
+              src="/logo.png"
+              className="h-8 md:h-14 w-8 md:w-14 object-cover rounded-lg"
+            ></img>
+            <p className="text-sm text-gray-600">
+              {new Date().getFullYear()}{" "}
+              <span className="font-semibold">FitManager</span>
+            </p>
+          </div>
+          <p className="text-sm text-gray-600 mt-2 sm:mt-0">
+            Developed by{" "}
+            <a
+              href="https://github.com/alessiocsassu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 font-semibold hover:underline"
+            >
+              Alessio Sassu
+            </a>
+          </p>
+        </div>
+      </footer>
     </div>
   );
 };

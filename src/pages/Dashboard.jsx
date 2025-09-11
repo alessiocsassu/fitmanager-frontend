@@ -66,7 +66,7 @@ const Dashboard = () => {
       </header>
 
       {/* Content */}
-      <main className="flex-1 p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+      <main className="flex-1 p-6 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto w-full">
         {/* Card Weight */}
         <Link
           to="/weight"
@@ -178,6 +178,8 @@ const Dashboard = () => {
           </div>
         </div>
       </main>
+
+      {/* Footer */}
       <footer className="bg-white border-t mt-8">
         <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center px-6 py-4">
           <div className="flex flex-cols-2 items-center md:gap-6">

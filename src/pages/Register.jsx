@@ -35,7 +35,10 @@ const Register = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-600 to-green-600">
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
-        <img src="/logo.png" className="h-24 w-24 object-contain mx-auto mb-4 rounded-lg"></img>
+        <img
+          src="/logo.png"
+          className="h-24 w-24 object-contain mx-auto mb-4 rounded-lg"
+        ></img>
         <h2 className="text-2xl font-bold mb-6 text-center">Register</h2>
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <form onSubmit={handleSubmit}>
@@ -95,6 +98,29 @@ const Register = () => {
             </Link>
           </p>
         </form>
+        
+        {/* Footer */}
+        <footer className="bg-white border-t mt-8">
+          <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center px-6 py-4">
+            <div className="flex flex-cols-2 items-center md:gap-6">
+              <p className="text-sm text-gray-600">
+                {new Date().getFullYear()}{" "}
+                <span className="font-semibold">FitManager</span>
+              </p>
+            </div>
+            <p className="text-sm text-gray-600 mt-2 sm:mt-0">
+              Developed by{" "}
+              <a
+                href="https://github.com/alessiocsassu"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 font-semibold hover:underline"
+              >
+                Alessio Sassu
+              </a>
+            </p>
+          </div>
+        </footer>
       </div>
     </div>
   );
