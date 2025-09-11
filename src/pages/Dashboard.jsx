@@ -181,7 +181,7 @@ const Dashboard = () => {
       <footer className="bg-white border-t mt-8">
         <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center px-6 py-4">
           <div className="flex flex-cols-2 items-center md:gap-6">
-            <img src="/logo.png" className="h-8 md:h-14 w-8 md:w-14"></img>
+            <img src="/logo.png" className="h-8 md:h-14 w-8 md:w-14 object-cover rounded-lg"></img>
             <p className="text-sm text-gray-600">
               {new Date().getFullYear()}{" "}
               <span className="font-semibold">FitManager</span>
