@@ -81,11 +81,11 @@ const Hydration = () => {
   }, {});
 
   const chartData = Object.keys(grouped)
+    .sort((a, b) => new Date(a) - new Date(b))
     .map((day) => ({
       date: day,
-      weight: grouped[day],
-    }))
-    .sort((a, b) => new Date(a.date) - new Date(b.date));
+      amount: grouped[day],
+    }));
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-600 to-green-600 flex flex-col">

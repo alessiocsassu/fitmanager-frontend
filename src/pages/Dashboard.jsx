@@ -100,7 +100,10 @@ const Dashboard = () => {
         </Link>
 
         {/* Card Macros */}
-        <div className="bg-white hover:bg-gray-100 rounded-xl shadow p-6 col-span-1 md:col-span-2">
+        <Link
+          to="/macros"
+          className="bg-white hover:bg-gray-100 rounded-xl shadow p-6 col-span-1 md:col-span-2"
+        >
           <h2 className="text-lg font-semibold text-gray-700 mb-4">
             Macros 🍎
           </h2>
@@ -124,7 +127,7 @@ const Dashboard = () => {
           ) : (
             <p className="text-gray-500 text-center">No data available</p>
           )}
-        </div>
+        </Link>
 
         {/* Card Profile */}
         <div className="bg-white hover:bg-gray-100 rounded-xl shadow p-6 col-span-1 md:col-span-2">
@@ -183,7 +186,10 @@ const Dashboard = () => {
       <footer className="bg-white border-t mt-8">
         <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center px-6 py-4">
           <div className="flex flex-cols-2 items-center md:gap-6">
-            <img src="/logo.png" className="h-8 md:h-14 w-8 md:w-14 object-cover rounded-lg"></img>
+            <img
+              src="/logo.png"
+              className="h-8 md:h-14 w-8 md:w-14 object-cover rounded-lg"
+            ></img>
             <p className="text-sm text-gray-600">
               {new Date().getFullYear()}{" "}
               <span className="font-semibold">FitManager</span>
