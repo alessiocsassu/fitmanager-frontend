@@ -55,9 +55,9 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-600 to-green-600 flex flex-col">
       {/* Header */}
-      <header className="bg-white shadow p-4 flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-gray-800">
-          Welcome, {user.username}
+      <header className="bg-white shadow p-4 flex justify-between items-bg-white shadow p-4 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 sm:gap-0">
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-800">
+          Welcome, {user.username} 👋
         </h1>
         <button
           onClick={() => {
@@ -74,7 +74,7 @@ const Dashboard = () => {
       <main className="flex-1 p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* Card Weight */}
         <div className="bg-white hover:bg-gray-100 rounded-xl shadow p-6 flex flex-col items-center">
-          <h2 className="text-lg font-semibold text-gray-700 mb-2">Last weight measure</h2>
+          <h2 className="text-lg font-semibold text-gray-700 mb-2">Last weight measure ⚖️</h2>
           <p className="text-4xl font-bold text-gray-900">{weight} kg</p>
           <p className="text-sm text-gray-500 mt-2">
             Target: {user.targetWeight || "N/A"} kg
@@ -83,7 +83,7 @@ const Dashboard = () => {
 
         {/* Card Hydration */}
         <Link to="/hydration" className="bg-white hover:bg-gray-100 rounded-xl shadow p-6 flex flex-col items-center">
-          <h2 className="text-lg font-semibold text-gray-700 mb-2">Hydration</h2>
+          <h2 className="text-lg font-semibold text-gray-700 mb-2">Hydration 💧</h2>
           <p className="text-3xl font-bold text-gray-900">{hydration} ml</p>
           <div className="w-full bg-gray-200 rounded-full h-3 mt-3">
             <div
@@ -96,7 +96,7 @@ const Dashboard = () => {
 
         {/* Card Macros */}
         <div className="bg-white hover:bg-gray-100 rounded-xl shadow p-6">
-          <h2 className="text-lg font-semibold text-gray-700 mb-4">Macros</h2>
+          <h2 className="text-lg font-semibold text-gray-700 mb-4">Macros 🍎</h2>
           {latestMacros ? (
             <ResponsiveContainer width="100%" height={200}>
               <PieChart>
@@ -123,8 +123,8 @@ const Dashboard = () => {
 
         {/* Card Profile */}
         <div className="bg-white hover:bg-gray-100 rounded-xl shadow p-6 col-span-1 md:col-span-2">
-          <h2 className="text-lg font-semibold text-gray-700 mb-4">User Profile</h2>
-          <div className="grid grid-cols-2 gap-4 text-gray-600">
+          <h2 className="text-lg font-semibold text-gray-700 mb-4">User Profile 👤</h2>
+          <div className="grid grid-cols-2 gap-4 text-gray-600 flex-col sm:flex-row">
             <p><span className="font-medium">Email:</span> {user.email}</p>
             <p><span className="font-medium">Date of Birth:</span> {user.dateOfBirth}</p>
             <p><span className="font-medium">Sex:</span> {user.sex}</p>

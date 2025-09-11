@@ -42,12 +42,21 @@ const Hydration = () => {
 
   const updateHydration = async (delta) => {
     try {
-      await api.post("/hydrations", { amount: delta });
+      await api.post("/hydrations", { amount: delta, date: getDayString(new Date()) });
       fetchHydration();
     } catch (err) {
       console.error("Error updating hydration", err);
     }
   };
+
+  const deleteHydration = async () => {
+    try {
+      await api.delete("/hydrations");
+      fetchHydration();
+    } catch (err) {
+      console.error("Error deleting last entry", err)
+    }
+  }
 
   const grouped = history.reduce((acc, h) => {
     const day = new Date(h.date).toLocaleDateString();
@@ -61,63 +70,71 @@ const Hydration = () => {
   }));
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-600 to-green-600 p-6">
+    <div className="min-h-screen bg-gradient-to-r from-blue-600 to-green-600 flex flex-col">
       {/* Header */}
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-white">Hydration Tracker</h1>
+      <header className="bg-white shadow p-4 flex justify-between items-bg-white shadow p-4 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 sm:gap-0">
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-800">
+          Hydration 💧
+        </h1>
         <button
           onClick={() => navigate("/dashboard")}
-          className="px-4 py-2 bg-white text-gray-700 rounded shadow hover:bg-gray-100 transition"
+          className="px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 transition"
         >
           Back to Dashboard
         </button>
-      </div>
-
-      {/* Buttons */}
-      <div className="bg-white rounded-xl shadow p-6 flex gap-6 justify-center mb-6">
-        <button
-          onClick={() => updateHydration(100)}
-          className="w-16 h-16 rounded-full bg-blue-200 text-blue-800 text-xl font-bold flex items-center justify-center hover:bg-blue-300 transition"
-        >
-          +100
-        </button>
-        <button
-          onClick={() => updateHydration(-100)}
-          className="w-16 h-16 rounded-full bg-red-200 text-red-800 text-xl font-bold flex items-center justify-center hover:bg-red-300 transition"
-        >
-          -100
-        </button>
-      </div>
-
-      {/* Progress bar */}
-      <div className="bg-white rounded-xl shadow p-6 mb-6">
-        <h2 className="text-lg font-semibold text-gray-700 mb-2">
-          Today's Progress
-        </h2>
-        <p className="text-2xl font-bold mb-2">{todayTotal} ml</p>
-        <div className="w-full bg-gray-200 rounded-full h-4">
-          <div
-            className="bg-blue-500 h-4 rounded-full"
-            style={{ width: `${(todayTotal / 3000) * 100}%` }}
-          />
+      </header>
+      <main className="flex-1 p-6 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6">
+        {/* Buttons */}
+        <div className="bg-white rounded-xl shadow p-6 flex grid gap-6 justify-center mb-6">
+          <h2 className="text-lg font-semibold text-gray-700 flex justify-center">
+            Add water
+          </h2>
+            <div className="flex justify-center gap-6">
+              <button
+              onClick={() => updateHydration(100)}
+              className="w-20 h-20 rounded-full bg-blue-200 text-blue-800 text-xl font-bold flex items-center justify-center hover:bg-blue-300 transition"
+            >
+              +100
+            </button>
+            <button
+              onClick={() => deleteHydration()}
+              className="w-20 h-20 rounded-full bg-red-200 text-red-800 text-xl font-bold flex items-center justify-center hover:bg-red-300 transition"
+            >
+              -100
+            </button>
+            </div>
         </div>
-        <p className="text-sm text-gray-500 mt-2">Target: 3000 ml</p>
-      </div>
 
-      {/* Chart */}
-      <div className="bg-white rounded-xl shadow p-6">
-        <h2 className="text-lg font-semibold text-gray-700 mb-4">
-          Daily Totals
-        </h2>
-        <ResponsiveContainer width="100%" height={250}>
-          <BarChart data={chartData}>
-            <XAxis dataKey="date" />
-            <YAxis />
-            <Tooltip />
-            <Bar dataKey="amount" fill="#3b82f6" />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+        {/* Progress bar */}
+        <div className="bg-white rounded-xl shadow p-6 mb-6">
+          <h2 className="text-lg font-semibold text-gray-700 mb-2">
+            Today's Progress
+          </h2>
+          <p className="text-2xl font-bold mb-2">{todayTotal} ml</p>
+          <div className="w-full bg-gray-200 rounded-full h-4">
+            <div
+              className="bg-blue-500 h-4 rounded-full"
+              style={{ width: `${(todayTotal / 3000) * 100}%` }}
+            />
+          </div>
+          <p className="text-sm text-gray-500 mt-2">Target: 3000 ml</p>
+        </div>
+
+        {/* Chart */}
+        <div className="bg-white rounded-xl shadow p-6 mb-6">
+          <h2 className="text-lg font-semibold text-gray-700 mb-4">
+            Daily Totals
+          </h2>
+          <ResponsiveContainer width="100%" height={250}>
+            <BarChart data={chartData}>
+              <XAxis dataKey="date" />
+              <YAxis />
+              <Tooltip />
+              <Bar dataKey="amount" fill="#3b82f6" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      </main>
     </div>
   );
 };

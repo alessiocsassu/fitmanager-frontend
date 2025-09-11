@@ -26,6 +26,7 @@ const Login = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-600 to-green-600">
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
+        <img src="/logo.png" className="max-w-sm"></img>
         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <form onSubmit={handleSubmit}>
