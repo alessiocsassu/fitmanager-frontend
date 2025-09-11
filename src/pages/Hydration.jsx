@@ -42,21 +42,28 @@ const Hydration = () => {
 
   const updateHydration = async (delta) => {
     try {
-      await api.post("/hydrations", { amount: delta, date: getDayString(new Date()) });
+      await api.post("/hydrations", {
+        amount: delta,
+        date: new Date().toISOString(),
+      });
       fetchHydration();
     } catch (err) {
       console.error("Error updating hydration", err);
     }
   };
 
-  const deleteHydration = async () => {
+  const deleteLastHydration = async () => {
     try {
-      await api.delete("/hydrations");
+      const res = await api.get("/hydrations?last=true");
+      const lastEntry = res.data[0];
+      if (!lastEntry) return;
+
+      await api.delete(`/hydrations/${lastEntry._id}`);
       fetchHydration();
     } catch (err) {
-      console.error("Error deleting last entry", err)
+      console.error("Error deleting last entry", err);
     }
-  }
+  };
 
   const grouped = history.reduce((acc, h) => {
     const day = new Date(h.date).toLocaleDateString();
@@ -72,7 +79,7 @@ const Hydration = () => {
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-600 to-green-600 flex flex-col">
       {/* Header */}
-      <header className="bg-white shadow p-4 flex justify-between items-bg-white shadow p-4 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 sm:gap-0">
+      <header className="bg-white shadow p-4 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 sm:gap-0">
         <h1 className="text-xl sm:text-2xl font-bold text-gray-800">
           Hydration 💧
         </h1>
@@ -83,26 +90,25 @@ const Hydration = () => {
           Back to Dashboard
         </button>
       </header>
-      <main className="flex-1 p-6 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6">
+
+      <main className="flex-1 p-6 grid grid-cols-1 gap-6">
         {/* Buttons */}
-        <div className="bg-white rounded-xl shadow p-6 flex grid gap-6 justify-center mb-6">
-          <h2 className="text-lg font-semibold text-gray-700 flex justify-center">
-            Add water
-          </h2>
-            <div className="flex justify-center gap-6">
-              <button
+        <div className="bg-white rounded-xl shadow p-6 flex flex-col gap-6 items-center mb-6">
+          <h2 className="text-lg font-semibold text-gray-700">Add water</h2>
+          <div className="flex justify-center gap-6">
+            <button
               onClick={() => updateHydration(100)}
               className="w-20 h-20 rounded-full bg-blue-200 text-blue-800 text-xl font-bold flex items-center justify-center hover:bg-blue-300 transition"
             >
               +100
             </button>
             <button
-              onClick={() => deleteHydration()}
+              onClick={() => deleteLastHydration()}
               className="w-20 h-20 rounded-full bg-red-200 text-red-800 text-xl font-bold flex items-center justify-center hover:bg-red-300 transition"
             >
               -100
             </button>
-            </div>
+          </div>
         </div>
 
         {/* Progress bar */}
