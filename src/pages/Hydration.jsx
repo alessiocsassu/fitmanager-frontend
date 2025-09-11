@@ -52,6 +52,15 @@ const Hydration = () => {
     }
   };
 
+    const deleteHydrationById = async (id) => {
+    try {
+      await api.delete(`/hydrations/${id}`);
+      fetchHydration();
+    } catch (err) {
+      console.error("Error deleting weight", err);
+    }
+  };
+
   const deleteLastHydration = async () => {
     try {
       const res = await api.get("/hydrations?last=true");
@@ -71,10 +80,13 @@ const Hydration = () => {
     return acc;
   }, {});
 
-  const chartData = Object.keys(grouped).map((day) => ({
+  const chartData = Object.keys(grouped)
+  .map((day) => ({
     date: day,
-    amount: grouped[day],
-  }));
+    weight: grouped[day],
+  }))
+  .sort((a, b) => new Date(a.date) - new Date(b.date));
+
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-600 to-green-600 flex flex-col">
@@ -91,7 +103,7 @@ const Hydration = () => {
         </button>
       </header>
 
-      <main className="flex-1 p-6 grid grid-cols-1 gap-6">
+      <main className="flex p-6 grid grid-cols-1 gap-6">
         {/* Buttons */}
         <div className="bg-white rounded-xl shadow p-6 flex flex-col gap-6 items-center mb-6">
           <h2 className="text-lg font-semibold text-gray-700">Add water</h2>
@@ -120,10 +132,40 @@ const Hydration = () => {
           <div className="w-full bg-gray-200 rounded-full h-4">
             <div
               className="bg-blue-500 h-4 rounded-full"
-              style={{ width: `${(todayTotal / 3000) * 100}%` }}
+              style={{ width: `${(todayTotal / 4000) * 100}%` }}
             />
           </div>
-          <p className="text-sm text-gray-500 mt-2">Target: 3000 ml</p>
+          <p className="text-sm text-gray-500 mt-2">Max: 4000 ml</p>
+        </div>
+
+        {/* List of Hydrations */}
+        <div className="bg-white rounded-xl shadow p-6 mb-6">
+          <h2 className="text-lg font-semibold text-gray-700 mb-4">
+            Hydration Entries
+          </h2>
+          {history.length === 0 ? (
+            <p className="text-gray-500">No hydration entries recorded yet.</p>
+          ) : (
+            <ul className="divide-y divide-gray-200 max-h-60 overflow-y-auto">
+              {history.map((h) => (
+                <li
+                  key={h._id}
+                  className="flex justify-between items-center py-2"
+                >
+                  <span className="text-gray-700">
+                    {new Date(h.date).toLocaleString()} —{" "}
+                    <span className="font-bold">{h.amount} ml</span>
+                  </span>
+                  <button
+                    onClick={() => deleteHydrationById(h._id)}
+                    className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition"
+                  >
+                    Delete
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         {/* Chart */}
