@@ -209,6 +209,34 @@ const Macros = () => {
           </ResponsiveContainer>
         </div>
       </main>
+
+      {/* Footer */}
+      <footer className="mt-auto bg-white border-t">
+        <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center px-6 py-4">
+          <div className="flex flex-cols-2 items-center md:gap-6">
+            <img
+              src="/logo.png"
+              className="h-8 md:h-14 w-8 md:w-14 object-cover rounded-lg"
+              alt="logo"
+            />
+            <p className="text-sm text-gray-600">
+              {new Date().getFullYear()}{" "}
+              <span className="font-semibold">FitManager</span>
+            </p>
+          </div>
+          <p className="text-sm text-gray-600 mt-2 sm:mt-0">
+            Developed by{" "}
+            <a
+              href="https://github.com/alessiocsassu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 font-semibold hover:underline"
+            >
+              Alessio Sassu
+            </a>
+          </p>
+        </div>
+      </footer>
     </div>
   );
 };

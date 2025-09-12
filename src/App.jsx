@@ -5,6 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import Hydration from "./pages/Hydration";
 import Weight from "./pages/Weight";
 import Macros from "./pages/Macros";
+import Profile from "./pages/Profile";
 import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/hydration" element={<Hydration />} />
           <Route path="/weight" element={<Weight />} />
           <Route path="/macros" element={<Macros />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>
     </BrowserRouter>

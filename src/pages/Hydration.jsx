@@ -88,7 +88,7 @@ const Hydration = () => {
     }));
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-600 to-green-600 flex flex-col">
+    <div className="flex flex-col min-h-screen bg-gradient-to-r from-blue-600 to-green-600 flex flex-col">
       {/* Header */}
       <header className="bg-white shadow p-4 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 sm:gap-0">
         <h1 className="text-xl sm:text-2xl font-bold text-gray-800">
@@ -184,7 +184,7 @@ const Hydration = () => {
       </main>
 
       {/* Footer */}
-      <footer className="bg-white border-t mt-8">
+      <footer className="mt-auto bg-white border-t mt-8">
         <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center px-6 py-4">
           <div className="flex flex-cols-2 items-center md:gap-6">
             <img

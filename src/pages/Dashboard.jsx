@@ -87,7 +87,7 @@ const Dashboard = () => {
           className="bg-white hover:bg-gray-100 rounded-xl shadow p-6 flex flex-col items-center col-span-1"
         >
           <h2 className="text-lg font-semibold text-gray-700 mb-2">
-            Hydration 💧
+            Today's hydration 💧
           </h2>
           <p className="text-3xl font-bold text-gray-900">{hydration} ml</p>
           <div className="w-full bg-gray-200 rounded-full h-3 mt-3">
@@ -105,7 +105,7 @@ const Dashboard = () => {
           className="bg-white hover:bg-gray-100 rounded-xl shadow p-6 col-span-1 md:col-span-2"
         >
           <h2 className="text-lg font-semibold text-gray-700 mb-4">
-            Macros 🍎
+            Today's macros 🍎
           </h2>
           {latestMacros ? (
             <ResponsiveContainer width="100%" height={200}>
@@ -130,7 +130,10 @@ const Dashboard = () => {
         </Link>
 
         {/* Card Profile */}
-        <div className="bg-white hover:bg-gray-100 rounded-xl shadow p-6 col-span-1 md:col-span-2">
+        <Link
+          to="/profile"
+          className="bg-white hover:bg-gray-100 rounded-xl shadow p-6 col-span-1 md:col-span-2"
+        >
           <div className="grid grid-cols-1 md:grid-cols-2 justify-between items-center mb-6">
             <h2 className="text-lg font-semibold text-gray-700 mb-4">
               User Profile 👤
@@ -152,7 +155,7 @@ const Dashboard = () => {
               <span className="font-medium">Email:</span> {user.email}
             </p>
             <p>
-              <span className="font-medium">Date of Birth:</span>{" "}
+              <span className="font-medium">Date of birth:</span>{" "}
               {new Date(user.dateOfBirth).toLocaleString("en-GB", {
                 day: "2-digit",
                 month: "2-digit",
@@ -171,7 +174,7 @@ const Dashboard = () => {
               {user.initialWeight || "N/A"} kg
             </p>
             <p>
-              <span className="font-medium">Target Weight:</span>{" "}
+              <span className="font-medium">Target weight:</span>{" "}
               {user.targetWeight || "N/A"} kg
             </p>
             <p>
@@ -179,7 +182,7 @@ const Dashboard = () => {
               {user.workoutsPerWeek || "N/A"}
             </p>
           </div>
-        </div>
+        </Link>
       </main>
 
       {/* Footer */}
